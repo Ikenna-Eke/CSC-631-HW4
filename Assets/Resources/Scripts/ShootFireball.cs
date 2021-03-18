@@ -5,7 +5,7 @@ using UnityEngine;
 public class ShootFireball : MonoBehaviour
 {
 
-    private float fireballRange = 10.0f;
+    private float fireballRange = 15.0f;
     private float fireballSpeed = 5.0f;
     private GameObject fireballPrefab;
 
