@@ -15,7 +15,7 @@ public class HealthScript : MonoBehaviour
 
     void Update()
     {
-        healthText.GetComponent<Text>().text = health.ToString();
+        //healthText.GetComponent<Text>().text = health.ToString();
         if(health <= 0)
         {
             healthText.text = "You lose";

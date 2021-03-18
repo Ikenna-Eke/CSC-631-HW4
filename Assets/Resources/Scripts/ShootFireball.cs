@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
+using System;
 
 public class ShootFireball : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class ShootFireball : MonoBehaviour
     private float fireballSpeed = 5.0f;
     private GameObject fireballPrefab;
     private GameObject health;
+
+    private Boolean justShot = false;
 
     void Start()
     {
@@ -20,15 +23,25 @@ public class ShootFireball : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            StartCoroutine(ShootFireballMethod());
+            if (justShot == false)
+            {
+                StartCoroutine(ShootFireballMethod());
+                justShot = true;
+                StartCoroutine(Wait());
+                justShot = false;
+            }
         }
+    }
+
+    IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(10000);
     }
 
     void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.tag == "Fireball")
         {
-            //health.GetComponent<HealthScript>().Damage();
             Debug.Log("Hit");
         }
     }
