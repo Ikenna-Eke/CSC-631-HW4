@@ -10,12 +10,12 @@ public class HealthScript : MonoBehaviour
         
     }
 
-    public Text healthText;
     public int health = 100;
+    public Text healthText;
 
     void Update()
     {
-        //healthText.GetComponent<Text>().text = health.ToString();
+        healthText.GetComponent<Text>().text = health.ToString();
         if(health <= 0)
         {
             healthText.text = "You lose";

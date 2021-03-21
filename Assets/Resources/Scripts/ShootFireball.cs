@@ -10,7 +10,7 @@ public class ShootFireball : MonoBehaviour
     private float fireballRange = 15.0f;
     private float fireballSpeed = 5.0f;
     private GameObject fireballPrefab;
-    private GameObject health;
+    public HealthScript health;
 
     private Boolean justShot = false;
 
@@ -43,6 +43,7 @@ public class ShootFireball : MonoBehaviour
         if(collision.gameObject.tag == "Fireball")
         {
             Debug.Log("Hit");
+            health.GetComponent<HealthScript>().Damage();
         }
     }
 
