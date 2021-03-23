@@ -30,11 +30,6 @@ public class ShootFireball : MonoBehaviour
             }
         }
     }
-    private void OnCollisionEnter(Collision other) {
-        if(other.gameObject.tag == "FireBall"){
-            gameObject.SetActive(false);
-        }
-    }
     IEnumerator Wait()
     {
         yield return new WaitForSeconds(10000);
