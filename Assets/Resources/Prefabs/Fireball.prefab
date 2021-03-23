@@ -4904,7 +4904,7 @@ GameObject:
   - component: {fileID: 8737025286684039134}
   - component: {fileID: 1357687557775911558}
   - component: {fileID: 2651891824940311654}
-  - component: {fileID: -4879230232074020343}
+  - component: {fileID: -6221257391625113275}
   m_Layer: 0
   m_Name: Fireball
   m_TagString: Fireball
@@ -9709,7 +9709,7 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!54 &-4879230232074020343
+--- !u!54 &-6221257391625113275
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

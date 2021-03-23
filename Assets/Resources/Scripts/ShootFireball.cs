@@ -1,19 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System;
 
 public class ShootFireball : MonoBehaviour
 {
-
-    private float fireballRange = 15.0f;
+    private float fireballRange = 6.0f;
     private float fireballSpeed = 5.0f;
     private GameObject fireballPrefab;
-    private GameObject health;
-
     private Boolean justShot = false;
-
+    
     void Start()
     {
         fireballPrefab = Resources.Load<GameObject>("Prefabs/Fireball");
@@ -32,18 +30,14 @@ public class ShootFireball : MonoBehaviour
             }
         }
     }
-
+    private void OnCollisionEnter(Collision other) {
+        if(other.gameObject.tag == "FireBall"){
+            gameObject.SetActive(false);
+        }
+    }
     IEnumerator Wait()
     {
         yield return new WaitForSeconds(10000);
-    }
-
-    void OnCollisionEnter(Collision collision)
-    {
-        if(collision.gameObject.tag == "Fireball")
-        {
-            Debug.Log("Hit");
-        }
     }
 
     private IEnumerator ShootFireballMethod()

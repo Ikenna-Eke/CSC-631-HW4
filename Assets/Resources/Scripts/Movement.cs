@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Movement : MonoBehaviour
-{
+{   
+    public HealthScript healthBar;
     public float speed = 2.0f;
     private CharacterController _charController;
 
@@ -22,5 +23,13 @@ public class Movement : MonoBehaviour
         movement *= Time.deltaTime;
         movement = transform.TransformDirection(movement);
         _charController.Move(movement);
+    }
+
+    private void OnCollisionEnter(Collision other) {
+        if(other.gameObject.tag == "Fireball")
+        {
+            Debug.Log(other.gameObject.tag);
+            healthBar.Damage();
+        }
     }
 }
