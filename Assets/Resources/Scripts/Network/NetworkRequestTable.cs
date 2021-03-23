@@ -14,13 +14,13 @@ public class NetworkRequestTable {
 		add(Constants.CMSG_SETNAME, "RequestSetName");
 		add(Constants.CMSG_READY, "RequestReady");
 		add(Constants.CMSG_MOVE, "RequestMove");
-		add(Constants.CMSG_INTERACT, "RequestInteract");
+	
 
 		// Smoke and Mirrors group
-		add(Constants.FIREBALL_ATTACK, "FireballAttack");
-		add(Constants.LOGIN, "ServerLogin");
-		add(Constants.REGISTER, "ServerRegister");
-		add(Constants.LOGOUT, "ServerLogout");
+		add(Constants.CMSG_FIREBALL_ATTACK, "FireballAttack");
+		add(Constants.CMSG_LOGIN, "ServerLogin");
+		add(Constants.CMSG_REGISTER, "ServerRegister");
+		add(Constants.CMSG_LOGOUT, "ServerLogout");
 	}
 	
 	public static void add(short request_id, string name) {
