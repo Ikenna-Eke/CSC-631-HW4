@@ -14,7 +14,12 @@ public class NetworkResponseTable {
 		add(Constants.SMSG_SETNAME, "ResponseSetName");
 		add(Constants.SMSG_READY, "ResponseReady");
 		add(Constants.SMSG_MOVE, "ResponseMove");
-		add(Constants.SMSG_INTERACT, "ResponseInteract");
+
+		// Smoke and Mirrors group
+		add(Constants.SMSG_FIREBALL_ATTACK, "ResponseFireballAttack");
+		add(Constants.SMSG_LOGIN, "ResponseServerLogin");
+		add(Constants.SMSG_REGISTER, "ResponseServerRegister");
+		add(Constants.SMSG_LOGOUT, "ResponseServerLogout");
 	}
 	
 	public static void add(short response_id, string name) {
