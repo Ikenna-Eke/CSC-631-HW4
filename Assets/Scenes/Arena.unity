@@ -139,6 +139,7 @@ GameObject:
   - component: {fileID: 21607145}
   - component: {fileID: 21607146}
   - component: {fileID: 21607147}
+  - component: {fileID: 21607148}
   m_Layer: 0
   m_Name: Player1Capsule
   m_TagString: Player
@@ -282,6 +283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 502990444e75dc649808a3f2399094c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: {fileID: 0}
 --- !u!20 &21607146
 Camera:
   m_ObjectHideFlags: 0
@@ -341,6 +343,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &21607148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 21607137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb147c4d5852f3e4394a4af1259cb357, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  healthText: {fileID: 1012232104}
 --- !u!1 &341672820
 GameObject:
   m_ObjectHideFlags: 0
@@ -459,6 +475,7 @@ GameObject:
   - component: {fileID: 442718483}
   - component: {fileID: 442718482}
   - component: {fileID: 442718481}
+  - component: {fileID: 442718491}
   m_Layer: 0
   m_Name: Player2Capsule
   m_TagString: Player
@@ -537,6 +554,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 502990444e75dc649808a3f2399094c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: {fileID: 0}
 --- !u!114 &442718484
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -661,6 +679,20 @@ Transform:
   m_Father: {fileID: 964147751}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 270, z: 0}
+--- !u!114 &442718491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 442718480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb147c4d5852f3e4394a4af1259cb357, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  healthText: {fileID: 0}
 --- !u!1 &623543795
 GameObject:
   m_ObjectHideFlags: 0
@@ -1070,8 +1102,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb147c4d5852f3e4394a4af1259cb357, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthText: {fileID: 0}
   health: 100
+  healthText: {fileID: 0}
 --- !u!1 &1051506176
 GameObject:
   m_ObjectHideFlags: 0
