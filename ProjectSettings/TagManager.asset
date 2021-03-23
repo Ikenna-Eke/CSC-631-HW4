@@ -4,7 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Fireball
+  - p1
+  - p2
+  - p1Health
+  - p2Health
   layers:
   - Default
   - TransparentFX
