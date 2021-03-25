@@ -8,6 +8,7 @@ namespace GameServer{
     class Client{
         public int ClientID;
         public TCP tcp;
+        public int id;
         public static int buffer = 4096; //4MB buffer
 
         public Client(int _ClientID){
@@ -17,7 +18,7 @@ namespace GameServer{
 
         public class TCP{
             public TcpClient socket;
-            private readonly int CID; // Client ID
+            private readonly int id; // Client ID
             private NetworkStream stream;
             private byte[] receiveBuffer;
 
