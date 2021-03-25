@@ -63,40 +63,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Resources\Scripts\Client.cs" />
     <Compile Include="Assets\Resources\Scripts\HealthScript.cs" />
     <Compile Include="Assets\Resources\Scripts\Look.cs" />
     <Compile Include="Assets\Resources\Scripts\Movement.cs" />
-    <Compile Include="Assets\Resources\Scripts\Network Client\GameManager.cs" />
-    <Compile Include="Assets\Resources\Scripts\Network Client\Network\ConnectionManager.cs" />
-    <Compile Include="Assets\Resources\Scripts\Network Client\Network\Constants.cs" />
-    <Compile Include="Assets\Resources\Scripts\Network Client\Network\DataReader.cs" />
-    <Compile Include="Assets\Resources\Scripts\Network Client\Network\ExtendedEventArgs.cs" />
-    <Compile Include="Assets\Resources\Scripts\Network Client\Network\GamePacket.cs" />
-    <Compile Include="Assets\Resources\Scripts\Network Client\Network\GamePacketStream.cs" />
-    <Compile Include="Assets\Resources\Scripts\Network Client\Network\MessageQueue.cs" />
-    <Compile Include="Assets\Resources\Scripts\Network Client\Network\NetworkRequestTable.cs" />
-    <Compile Include="Assets\Resources\Scripts\Network Client\Network\NetworkResponseTable.cs" />
-    <Compile Include="Assets\Resources\Scripts\Network Client\Network\Request\NetworkRequest.cs" />
-    <Compile Include="Assets\Resources\Scripts\Network Client\Network\Request\RequestHeartbeat.cs" />
-    <Compile Include="Assets\Resources\Scripts\Network Client\Network\Request\RequestInteract.cs" />
-    <Compile Include="Assets\Resources\Scripts\Network Client\Network\Request\RequestJoin.cs" />
-    <Compile Include="Assets\Resources\Scripts\Network Client\Network\Request\RequestLeave.cs" />
-    <Compile Include="Assets\Resources\Scripts\Network Client\Network\Request\RequestMove.cs" />
-    <Compile Include="Assets\Resources\Scripts\Network Client\Network\Request\RequestReady.cs" />
-    <Compile Include="Assets\Resources\Scripts\Network Client\Network\Request\RequestSetName.cs" />
-    <Compile Include="Assets\Resources\Scripts\Network Client\Network\Response\NetworkResponse.cs" />
-    <Compile Include="Assets\Resources\Scripts\Network Client\Network\Response\ResponseFireballAttack.cs" />
-    <Compile Include="Assets\Resources\Scripts\Network Client\Network\Response\ResponseInteract.cs" />
-    <Compile Include="Assets\Resources\Scripts\Network Client\Network\Response\ResponseJoin.cs" />
-    <Compile Include="Assets\Resources\Scripts\Network Client\Network\Response\ResponseLeave.cs" />
-    <Compile Include="Assets\Resources\Scripts\Network Client\Network\Response\ResponseLogin.cs" />
-    <Compile Include="Assets\Resources\Scripts\Network Client\Network\Response\ResponseLogout.cs" />
-    <Compile Include="Assets\Resources\Scripts\Network Client\Network\Response\ResponseMove.cs" />
-    <Compile Include="Assets\Resources\Scripts\Network Client\Network\Response\ResponseReady.cs" />
-    <Compile Include="Assets\Resources\Scripts\Network Client\Network\Response\ResponseRegister.cs" />
-    <Compile Include="Assets\Resources\Scripts\Network Client\Network\Response\ResponseSetName.cs" />
-    <Compile Include="Assets\Resources\Scripts\Network Client\NetworkManager.cs" />
+    <Compile Include="Assets\Resources\Scripts\Server and Client\Client.cs" />
+    <Compile Include="Assets\Resources\Scripts\Server and Client\GameServer.cs" />
+    <Compile Include="Assets\Resources\Scripts\Server and Client\Server.cs" />
     <Compile Include="Assets\Resources\Scripts\ShootFireball.cs" />
+    <Compile Include="Assets\Resources\Scripts\UIManager.cs" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.20f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

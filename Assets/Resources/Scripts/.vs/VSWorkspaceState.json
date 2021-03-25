@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Server and Client"
   ],
-  "SelectedNode": "\\HealthScript.cs",
+  "SelectedNode": "\\Server and Client\\GameServer.cs",
   "PreviewInSolutionExplorer": false
 }
