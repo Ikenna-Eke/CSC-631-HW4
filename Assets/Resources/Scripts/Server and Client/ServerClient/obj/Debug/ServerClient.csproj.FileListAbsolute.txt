@@ -1,0 +1,12 @@
+/Users/JPL-ST-000/Desktop/ServerClient/ServerClient/bin/Debug/ServerClient.exe
+/Users/JPL-ST-000/Desktop/ServerClient/ServerClient/bin/Debug/ServerClient.pdb
+/Users/JPL-ST-000/Desktop/ServerClient/ServerClient/obj/Debug/ServerClient.csprojAssemblyReference.cache
+/Users/JPL-ST-000/Desktop/ServerClient/ServerClient/obj/Debug/ServerClient.csproj.CoreCompileInputs.cache
+/Users/JPL-ST-000/Desktop/ServerClient/ServerClient/obj/Debug/ServerClient.exe
+/Users/JPL-ST-000/Desktop/ServerClient/ServerClient/obj/Debug/ServerClient.pdb
+/Users/JPL-ST-000/Desktop/Server and Client/ServerClient/bin/Debug/ServerClient.exe
+/Users/JPL-ST-000/Desktop/Server and Client/ServerClient/bin/Debug/ServerClient.pdb
+/Users/JPL-ST-000/Desktop/Server and Client/ServerClient/obj/Debug/ServerClient.csprojAssemblyReference.cache
+/Users/JPL-ST-000/Desktop/Server and Client/ServerClient/obj/Debug/ServerClient.csproj.CoreCompileInputs.cache
+/Users/JPL-ST-000/Desktop/Server and Client/ServerClient/obj/Debug/ServerClient.exe
+/Users/JPL-ST-000/Desktop/Server and Client/ServerClient/obj/Debug/ServerClient.pdb
