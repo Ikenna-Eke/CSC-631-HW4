@@ -36,6 +36,18 @@ namespace GameServer{
                 receiveBuffer = new byte[buffer];
 
                 stream.BeginRead(receiveBuffer, 0, buffer,  ReceiveCallback, null);
+
+                ServerSend.welcome(id, "THE WELCOME METHOD IS WORKING"); // !!!! we probably won't need this, this is just to test by calling the method to send a message
+            }
+
+            public void SendData(Packet _packet){ // !!!!!! I don't know why Packet is giving an error his code looks like this with no extra imports !!!!!!!
+                try{
+                    if(socket != null){
+                        stream.BeginWrite(_packet.ToArray(), 0, _packet.Length(), null, null);
+                    }
+                }catch(Exception _ex){
+                    Console.WriteLine("Error sending data to player {id} via TCP: {_ex}");
+                }
             }
 
             private void ReceiveCallback(IAsyncResult _result){
