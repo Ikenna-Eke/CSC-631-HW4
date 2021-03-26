@@ -30,7 +30,7 @@ namespace GameServer{
                 _packet.Write(_msg);
                 _packet.Write(_toClient);
 
-                SendTCPData(_toClient, _packet);
+                SendTCPDataint(_toClient, _packet);
             }
         }
     }
