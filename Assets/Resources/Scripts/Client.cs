@@ -107,7 +107,7 @@ public class Client : MonoBehaviour
                 byte[] _data = new byte[_byteLength];
                 Array.Copy(receiveBuffer, _data, _byteLength);
 
-                receivedData.Reset(HandleData(_data)); // !!!! I don't know why Reset() is throwing an error
+                receivedData.Reset(HandleData(_data));
                 stream.BeginRead(receiveBuffer, 0, buffer, ReceiveCallback, null);
             }
             catch (Exception _ex)
@@ -120,7 +120,7 @@ public class Client : MonoBehaviour
         {
             int _packetLength = 0;
 
-            receivedData.SetBytes(_data); // !!!!! I don't know why SetBytes is throwing an error
+            receivedData.SetBytes(_data);
 
             if (receivedData.UnreadLength() >= 4)
             {
@@ -132,7 +132,6 @@ public class Client : MonoBehaviour
             }
 
 
-            // !!!!! Bunch of errors here
             while (_packetLength > 0 && _packetLength <= receivedData.UnreadLength())
             {
                 byte[] _packetBytes = receivedData.ReadBytes(_packetLength);
@@ -249,6 +248,7 @@ public class Client : MonoBehaviour
         packetHandlers = new Dictionary<int, PacketHandler>()
         {
             { (int)ServerPackets.welcome, ClientHandle.Welcome },
+            { (int)ServerPackets.spawnPlayer, ClientHandle.SpawnPlayer },
             { (int)ServerPackets.udpTest, ClientHandle.UDPTest }
         };
 

@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Text;
 using System.Net;
 using System.Net.Sockets;
+using System.Numerics;
 
 namespace GameServer{
     class Client{
         public int ClientID;
         public TCP tcp;
         public int id;
+        public Player player;
         public static int buffer = 4096; //4MB buffer
         public UDP udp;
 
@@ -17,9 +19,7 @@ namespace GameServer{
             tcp = new TCP(id);
             udp = new UDP(id);
         }
-
         
-
         public class TCP{
             public TcpClient socket;
             private readonly int id; // Client ID
@@ -148,6 +148,24 @@ namespace GameServer{
                         Server.packetHandlers[_packetId](id, _packet);
                     }
                 });
+            }
+        }
+
+        public void SendIntoGame(string _playerName){
+            player = new Player(id, _playerName, new Vector3(0, 0, 0));
+
+            foreach(Client _client in Server.clients.Values){
+                if(_client.player != null){
+                    if(_client.id != id){
+                        ServerSend.SpawnPlayer(id, _client.player);
+                    }
+                }
+            }
+
+            foreach(Client _client in Server.clients.Values){
+                if(_client.player != null){
+                    ServerSend.SpawnPlayer(_client.id, player);
+                }
             }
         }
     }

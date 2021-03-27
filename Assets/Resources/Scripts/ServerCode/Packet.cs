@@ -1,16 +1,21 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Numerics;
 
 namespace GameServer{
 
     public enum ServerPackets{
         welcome = 1,
+        spawnPlayer,
+        playerPosition,
+        playerRotation,
         udpTest
     }
 
 public enum ClientPackets{
     welcomeReceived = 1,
+    playerMovement,
     udpTestReceived
 }
 
@@ -132,6 +137,22 @@ public enum ClientPackets{
             Write(_value.Length); 
             buffer.AddRange(Encoding.ASCII.GetBytes(_value));
         }
+
+        public void Write(Vector3 _value)
+        {
+            Write(_value.X);
+            Write(_value.Y);
+            Write(_value.Z);
+        }
+
+        public void Write(Quaternion _value)
+        {
+            Write(_value.X);
+            Write(_value.Y);
+            Write(_value.Z);
+            Write(_value.W);
+        }
+
         #endregion
 
         #region Read Data
@@ -271,6 +292,14 @@ public enum ClientPackets{
             {
                 throw new Exception("Could not read value of type 'string'!");
             }
+        }
+
+        public Vector3 ReadVector3(bool _moveReadPos = true){
+            return new Vector3(ReadFloat(_moveReadPos), ReadFloat(_moveReadPos), ReadFloat(_moveReadPos));
+        }
+
+        public Quaternion ReadQuaternion(bool _moveReadPos = true){
+            return new Quaternion(ReadFloat(_moveReadPos), ReadFloat(_moveReadPos), ReadFloat(_moveReadPos), ReadFloat(_moveReadPos));
         }
         #endregion
 

@@ -7,12 +7,16 @@ using UnityEngine;
 public enum ServerPackets
 {
     welcome = 1,
+    spawnPlayer,
+    playerPosition,
+    playerRotation,
     udpTest
 }
 
 public enum ClientPackets
 {
     welcomeReceived = 1,
+    playerMovement,
     udpTestReceived
 }
 
@@ -133,6 +137,22 @@ public class Packet : IDisposable
         Write(_value.Length);
         buffer.AddRange(Encoding.ASCII.GetBytes(_value));
     }
+
+    public void Write(Vector3 _value)
+    {
+        Write(_value.x);
+        Write(_value.y);
+        Write(_value.z);
+    }
+
+    public void Write(Quaternion _value)
+    {
+        Write(_value.x);
+        Write(_value.y);
+        Write(_value.z);
+        Write(_value.w);
+    }
+
     #endregion
 
     #region Read Data
@@ -273,6 +293,17 @@ public class Packet : IDisposable
             throw new Exception("Could not read value of type 'string'!");
         }
     }
+
+    public Vector3 ReadVector3(bool _moveReadPos = true)
+    {
+        return new Vector3(ReadFloat(_moveReadPos), ReadFloat(_moveReadPos), ReadFloat(_moveReadPos));
+    }
+
+    public Quaternion ReadQuaternion(bool _moveReadPos = true)
+    {
+        return new Quaternion(ReadFloat(_moveReadPos), ReadFloat(_moveReadPos), ReadFloat(_moveReadPos), ReadFloat(_moveReadPos));
+    }
+
     #endregion
 
     private bool disposed = false;
