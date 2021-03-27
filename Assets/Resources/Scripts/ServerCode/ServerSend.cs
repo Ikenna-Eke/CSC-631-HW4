@@ -4,6 +4,12 @@ using System.Text;
 
 namespace GameServer{
     class ServerSend{
+
+        private static void SendTCPData(int _toClient, Packet _packet)
+        {
+            _packet.WriteLength();
+            Server.clients[_toClient].tcp.SendData(_packet);
+        }
         public static void SendTCPDataint (int _toClient, Packet _packet){
             _packet.WriteLength();
             Server.clients[_toClient].tcp.SendData(_packet);
