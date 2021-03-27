@@ -10,11 +10,15 @@ namespace GameServer{
         public TCP tcp;
         public int id;
         public static int buffer = 4096; //4MB buffer
+        public UDP udp;
 
         public Client(int _ClientID){
             id = _ClientID;
             tcp = new TCP(id);
+            udp = new UDP(id);
         }
+
+        
 
         public class TCP{
             public TcpClient socket;
@@ -43,7 +47,7 @@ namespace GameServer{
                 ServerSend.Welcome(id, "THE WELCOME METHOD IS WORKING"); // !!!! we probably won't need this, this is just to test by calling the method to send a message
             }
 
-            public void SendData(Packet _packet){ // !!!!!! I don't know why Packet is giving an error his code looks like this with no extra imports !!!!!!!
+            public void SendData(Packet _packet){
                 try{
                     if(socket != null){
                         stream.BeginWrite(_packet.ToArray(), 0, _packet.Length(), null, null);
@@ -70,54 +74,81 @@ namespace GameServer{
                 }
             }
 
-            private bool HandleData(byte[] _data)
-        {
-            int _packetLength = 0;
+            private bool HandleData(byte[] _data){
+                int _packetLength = 0;
 
-            receivedData.SetBytes(_data); // !!!!! I don't know why SetBytes is throwing an error
-
-            if(receivedData.UnreadLength() >= 4)
-            {
-                _packetLength = receivedData.ReadInt();
-                if(_packetLength <= 0)
-                {
-                    return true;
-                }
-            }
-
-
-            // !!!!! Bunch of errors here
-            while (_packetLength > 0 && _packetLength <= receivedData.UnreadLength())
-            {
-                byte[] _packetBytes = receivedData.ReadBytes(_packetLength);
-                ThreadManager.ExecuteOnMainThread(() =>
-                {
-                    using (Packet _packet = new Packet(_packetBytes))
-                    {
-                        int _packetID = _packet.ReadInt();
-                        Server.packetHandlers[_packetID](id, _packet);
-                    }
-                });
-
-                _packetLength = 0;
+                receivedData.SetBytes(_data); 
 
                 if(receivedData.UnreadLength() >= 4)
                 {
                     _packetLength = receivedData.ReadInt();
-                    if (_packetLength <= 0)
+                    if(_packetLength <= 0)
                     {
                         return true;
                     }
                 }
-            }
 
-            if(_packetLength <= 1)
-            {
-                return true;
-            }
 
-            return false;
+                while (_packetLength > 0 && _packetLength <= receivedData.UnreadLength())
+                {
+                    byte[] _packetBytes = receivedData.ReadBytes(_packetLength);
+                    ThreadManager.ExecuteOnMainThread(() =>
+                    {
+                        using (Packet _packet = new Packet(_packetBytes))
+                        {
+                            int _packetID = _packet.ReadInt();
+                            Server.packetHandlers[_packetID](id, _packet);
+                        }
+                    });
+
+                    _packetLength = 0;
+
+                    if(receivedData.UnreadLength() >= 4)
+                    {
+                        _packetLength = receivedData.ReadInt();
+                        if (_packetLength <= 0)
+                        {
+                            return true;
+                        }
+                    }
+                }
+
+                if(_packetLength <= 1)
+                {
+                    return true;
+                }
+
+                return false;
+            }
         }
+
+        public class UDP{
+            public IPEndPoint endPoint;
+            private int id;
+            public UDP(int _id){
+                id = _id;
+            }
+
+            public void Connect(IPEndPoint _endPoint){
+                endPoint = _endPoint;
+                ServerSend.UDPTest(id);
+            }
+
+            public void SendData(Packet _packet){
+                Server.SendUDPData(endPoint, _packet);
+            }
+
+            public void HandleData(Packet _packet){
+                int _packetLength = _packetData.ReadInt();
+                byte[] _packetBytes = _packetData.ReadBytes(_packetLength);
+
+                ThreadManager.ExecuteOnMainThread(() => {
+                    using (Packet _packet = new Packet(_packetBytes)){
+                        int _packetId = _packet.ReadInt(); // Not sure if packetID or packetId
+                        Server.packetHandlers[_packetId](id, _packet);
+                    }
+                });
+            }
         }
     }
 }

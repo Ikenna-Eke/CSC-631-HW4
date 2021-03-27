@@ -4,15 +4,15 @@ using System.Text;
 
 namespace GameServer{
 
-    public enum ServerPackets
-    {
-        welcome = 1
+    public enum ServerPackets{
+        welcome = 1,
+        udpTest
     }
 
-    public enum ClientPackets
-    {
-        welcomeReceived = 1
-    }
+public enum ClientPackets{
+    welcomeReceived = 1,
+    
+}
 
     public class Packet : IDisposable
     {

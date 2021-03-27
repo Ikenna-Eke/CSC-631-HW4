@@ -14,6 +14,7 @@ public class Client : MonoBehaviour
     public int port = 30033;
     public int localID = 0;
     public TCP tcp;
+    public UDP udp;
 
     private delegate void PacketHandler(Packet _packet);
     private static Dictionary<int, PacketHandler> packetHandlers;
@@ -23,8 +24,8 @@ public class Client : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-        }else if(instance != this)
-        {   
+        } else if (instance != this)
+        {
             //Making sure only one instance of the client class exists
             Debug.Log("Instance already exists");
             Destroy(this);
@@ -34,6 +35,7 @@ public class Client : MonoBehaviour
     private void Start()
     {
         tcp = new TCP();
+        udp = new UDP();
     }
 
     public void ConnectToServer()
@@ -81,7 +83,7 @@ public class Client : MonoBehaviour
         {
             try
             {
-                if(socket != null)
+                if (socket != null)
                 {
                     stream.BeginWrite(_packet.ToArray(), 0, _packet.Length(), null, null);
                 }
@@ -120,10 +122,10 @@ public class Client : MonoBehaviour
 
             receivedData.SetBytes(_data); // !!!!! I don't know why SetBytes is throwing an error
 
-            if(receivedData.UnreadLength() >= 4)
+            if (receivedData.UnreadLength() >= 4)
             {
                 _packetLength = receivedData.ReadInt();
-                if(_packetLength <= 0)
+                if (_packetLength <= 0)
                 {
                     return true;
                 }
@@ -145,7 +147,7 @@ public class Client : MonoBehaviour
 
                 _packetLength = 0;
 
-                if(receivedData.UnreadLength() >= 4)
+                if (receivedData.UnreadLength() >= 4)
                 {
                     _packetLength = receivedData.ReadInt();
                     if (_packetLength <= 0)
@@ -155,7 +157,7 @@ public class Client : MonoBehaviour
                 }
             }
 
-            if(_packetLength <= 1)
+            if (_packetLength <= 1)
             {
                 return true;
             }
@@ -164,11 +166,90 @@ public class Client : MonoBehaviour
         }
     }
 
+    public class UDP
+    {
+        public UdpClient socket;
+        public IPEndPoint endPoint;
+
+        public UDP()
+        {
+            endPoint = new IPEndPoint(IPAddress.Parse(instance.ip), instance.port);
+        }
+
+        public void Connect(int _localPort)
+        {
+            socket = new UdpClient(_localPort);
+
+            socket.Connect(endPoint);
+            socket.BeginReceive(ReceiveCallback, null);
+
+            using(Packet _packet = new Packet())
+            {
+                SendData(_packet);
+            }
+        }
+
+        public void SendData(Packet _packet)
+        {
+            try
+            {
+                _packet.InsertInt(instance.localID);
+                if(socket != null)
+                {
+                    socket.BeginSend(_packet.ToArray(), _packet.Length(), null, null);
+                }
+            }
+            catch(Exception _ex)
+            {
+                Debug.Log("Error sending data to server via UDP: {_ex}");
+            }
+        }
+
+        private void ReceiveCallback(IAsyncResult _result)
+        {
+            try
+            {
+                byte[] _data = socket.EndReceive(_result, ref endPoint);
+                socket.BeginReceive(ReceiveCallback, null);
+
+                if(_data.Length < 4)
+                {
+                    return;
+                }
+
+                HandleData(_data);
+
+            }catch(Exception _ex)
+            {
+
+            }
+        }
+
+        private void HandleData(byte[] _data)
+        {
+            using (Packet _packet = new Packet(_data))
+            {
+                int _packetLength = _packet.ReadInt();
+                _data = _packet.ReadBytes(_packetLength);
+            }
+
+            ThreadManager.ExecuteOnMainThread(() =>
+            {
+                using (Packet _packet = new Packet(_data))
+                {
+                    int _packetID = _packet.ReadInt(); //or is it _packetId?
+                    packetHandlers[_packetID](_packet);
+
+                }
+            });
+        }
+    }
     private void InitializeClientData()
     {
         packetHandlers = new Dictionary<int, PacketHandler>()
         {
-            { (int)ServerPackets.welcome, ClientHandle.Welcome }
+            { (int)ServerPackets.welcome, ClientHandle.Welcome },
+            { (int)ServerPackets.udpTest, ClientHandle.UDPTest }
         };
 
         Debug.Log("Initialized packets");

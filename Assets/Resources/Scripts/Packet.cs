@@ -6,15 +6,17 @@ using UnityEngine;
 
 public enum ServerPackets
 {
-    welcome = 1
+    welcome = 1,
+    udpTest
 }
 
 public enum ClientPackets
 {
-    welcomeReceived = 1
+    welcomeReceived = 1,
+    udpTestReceived
 }
 
-public class Packet : IDisposable // !!! again i dont know why packet is throwing an error
+public class Packet : IDisposable
 {
     private List<byte> buffer;
     private byte[] readableBuffer;
