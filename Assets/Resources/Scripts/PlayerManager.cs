@@ -8,6 +8,7 @@ public class PlayerManager : MonoBehaviour
     public string username;
     public float health;
     public float maxHealth;
+    public int itemCount = 0;
     public MeshRenderer model;
 
     public void Initialize(int _id, string _username)
@@ -32,9 +33,9 @@ public class PlayerManager : MonoBehaviour
         model.enabled = false;
     }
 
-    /* public void Respawn() 
+    public void Respawn() 
     {
         model.enabled = true;
         SetHealth(maxHealth);
-    } */
+    } 
 }

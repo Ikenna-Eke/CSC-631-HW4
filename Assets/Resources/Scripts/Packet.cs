@@ -12,6 +12,13 @@ public enum ServerPackets
     playerRotation,
     playerDisconnected,
     playerHealth,
+    playerRespawned,
+    createItemSpawner,
+    itemSpawned,
+    itemPickedUp,
+    spawnProjectile,
+    projectilePosition,
+    projectileExploded,
     udpTest
 }
 
@@ -20,6 +27,7 @@ public enum ClientPackets
     welcomeReceived = 1,
     playerMovement,
     playerShoot,
+    playerThrowItem,
     udpTestReceived
 }
 
