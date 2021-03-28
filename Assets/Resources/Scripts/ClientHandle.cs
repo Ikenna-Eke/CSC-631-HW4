@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Net;
-using System.Numerics;
+//using System.Numerics; 
 
 public class ClientHandle : MonoBehaviour
 {
@@ -22,8 +22,8 @@ public class ClientHandle : MonoBehaviour
     {
         int _id = _packet.ReadInt();
         string _username = _packet.ReadString();
-        Vector3 _position = _packet.ReadVector3();
-        Quaternion _rotation = _packet.ReadQuaternion();
+        Vector3 _position = _packet.ReadVector3(); //commenting out Systems.Numeric can remove error for Vector3
+        Quaternion _rotation = _packet.ReadQuaternion(); // and Quarternion
 
         GameManager.instance.SpawnPlayer(_id, _username, _position, _rotation);
     }
@@ -44,11 +44,25 @@ public class ClientHandle : MonoBehaviour
         GameManager.players[_id].transform.rotation = _rotation;
     }
 
+    public static void PlayerDisconnected(Packet _packet)
+    {
+        int _id = _packet.ReadInt();
+        Destroy(GameManager.players[_id].gameObject);
+        GameManager.players.Remove(_id);
+    }
+
+    public static void PlayerHealth(Packet _packet)
+    {
+        int _id = _packet.ReadInt();
+        float _health = _packet.ReadFloat();
+        GameManager.players[_id].SetHealth(_health);
+    }
+
     public static void UDPTest(Packet _packet)
     {
         string _msg = _packet.ReadString();
 
-        Debug.Log("Received packet via UDP. Message: {_msg}");
+        Debug.Log($"Received packet via UDP. Message: {_msg}");
         ClientSend.UDPTestReceived();
     }
 }

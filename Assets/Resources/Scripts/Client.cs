@@ -98,7 +98,7 @@ public class Client : MonoBehaviour
             }
             catch (Exception _ex)
             {
-                Debug.Log("Error sending data to the server via TCP: {_ex}");
+                Debug.Log($"Error sending data to the server via TCP: {_ex}");
             }
         }
 
@@ -219,7 +219,7 @@ public class Client : MonoBehaviour
             }
             catch(Exception _ex)
             {
-                Debug.Log("Error sending data to server via UDP: {_ex}");
+                Debug.Log($"Error sending data to server via UDP: {_ex}");
             }
         }
 
@@ -279,6 +279,8 @@ public class Client : MonoBehaviour
             { (int)ServerPackets.spawnPlayer, ClientHandle.SpawnPlayer },
             { (int)ServerPackets.playerPosition, ClientHandle.PlayerPosition },
             { (int)ServerPackets.playerRotation, ClientHandle.PlayerRotation },
+            { (int)ServerPackets.playerDisconnected, ClientHandle.PlayerDisconnected },
+            { (int)ServerPackets.playerHealth, ClientHandle.PlayerHealth },
             { (int)ServerPackets.udpTest, ClientHandle.UDPTest }
         };
 

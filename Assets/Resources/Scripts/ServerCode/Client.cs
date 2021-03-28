@@ -53,7 +53,7 @@ namespace GameServer{
                         stream.BeginWrite(_packet.ToArray(), 0, _packet.Length(), null, null);
                     }
                 }catch(Exception _ex){
-                    Console.WriteLine("Error sending data to player {id} via TCP: {_ex}");
+                    Console.WriteLine($"Error sending data to player {id} via TCP: {_ex}");
                 }
             }
 
@@ -71,7 +71,7 @@ namespace GameServer{
                     receivedData.Reset(HandleData(_data));
                     stream.BeginRead(receiveBuffer, 0, buffer, ReceiveCallback, null);
                 }catch(Exception _ex){
-                    Console.WriteLine("Error receiving TCP data, ERROR: {_ex}");
+                    Console.WriteLine($"Error receiving TCP data, ERROR: {_ex}");
                     Server.clients[id].Disconnect();
                 }
             }
@@ -184,7 +184,7 @@ namespace GameServer{
         }
 
         private void Disconnect(){
-            Console.WriteLine("{tcp.socket.Client.RemoteEndPoint} has disconnected");
+            Console.WriteLine($"{tcp.socket.Client.RemoteEndPoint} has disconnected");
 
             player = null;
             tcp.Disconnect();

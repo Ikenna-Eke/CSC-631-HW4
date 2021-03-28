@@ -31,21 +31,29 @@ public class ClientSend : MonoBehaviour
     {
         using(Packet _packet = new Packet((int)ClientPackets.playerMovement))
         {
-            _packetsWrite(_inputs.Length);
+            _packet.Write(_inputs.Length);
             foreach (bool _input in _inputs)
             {
                 _packet.Write(_input);
             }
 
-            _packet.Write(GameManager.players[ClientSend.inctance.localId].transform.rotation);
+            _packet.Write(GameManager.players[Client.instance.localID].transform.rotation);
 
             SendUDPData(_packet);
         };
     }
 
+    public static void PlayerShoot(Vector3 _facing)
+    {
+        using (Packet _packet = new Packet((int)ClientPackets.playerShoot))
+        {
+            _packet.Write(_facing);
+            SendTCPData(_packet);
+        }
+    }
     public static void UDPTestReceived()
     {
-        using Packet _packet = new Packet((int)ClientPackets.udpTestReceived))
+        using (Packet _packet = new Packet((int)ClientPackets.udpTestReceived))
         {
             _packet.Write("Received a UDP packet.");
             SendUDPData(_packet);
