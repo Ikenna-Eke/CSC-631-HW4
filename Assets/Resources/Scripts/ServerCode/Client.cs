@@ -141,7 +141,6 @@ namespace GameServer{
 
             public void Connect(IPEndPoint _endPoint){
                 endPoint = _endPoint;
-                ServerSend.UDPTest(id);
             }
 
             public void SendData(Packet _packet){
@@ -165,24 +164,35 @@ namespace GameServer{
             }
         }
 
-        public void SendIntoGame(string _playerName){
-            player = new Player(id, _playerName, new Vector3(0, 0, 0));
+        public void SendIntoGame(string _playerName)
+    {
+        player = NetworkManager.instance.InstantiatePlayer();
+        player.Initialize(id, _playerName);
 
-            foreach(Client _client in Server.clients.Values){
-                if(_client.player != null){
-                    if(_client.id != id){
-                        ServerSend.SpawnPlayer(id, _client.player);
-                    }
-                }
-            }
-
-            foreach(Client _client in Server.clients.Values){
-                if(_client.player != null){
-                    ServerSend.SpawnPlayer(_client.id, player);
+        foreach (Client _client in Server.clients.Values)
+        {
+            if (_client.player != null)
+            {
+                if (_client.id != id)
+                {
+                    ServerSend.SpawnPlayer(id, _client.player);
                 }
             }
         }
 
+        foreach (Client _client in Server.clients.Values)
+        {
+            if (_client.player != null)
+            {
+                ServerSend.SpawnPlayer(_client.id, player);
+            }
+        }
+        
+        foreach (ItemSpawner _itemSpawner in ItemSpawner.spawners.Values)
+        {
+            ServerSend.CreateItemSpawner(id, _itemSpawner.spawnerId, _itemSpawner.transform.position, _itemSpawner.hasItem);
+        }
+    }
         private void Disconnect(){
             Console.WriteLine($"{tcp.socket.Client.RemoteEndPoint} has disconnected");
 
