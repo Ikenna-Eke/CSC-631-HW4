@@ -36,14 +36,31 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\Resources\Scripts\CameraController.cs" />
      <Compile Include="Assets\Resources\Scripts\Client.cs" />
+     <Compile Include="Assets\Resources\Scripts\ClientHandle.cs" />
+     <Compile Include="Assets\Resources\Scripts\ClientSend.cs" />
+     <Compile Include="Assets\Resources\Scripts\GameManager.cs" />
      <Compile Include="Assets\Resources\Scripts\HealthScript.cs" />
+     <Compile Include="Assets\Resources\Scripts\ItemSpawner.cs" />
      <Compile Include="Assets\Resources\Scripts\Look.cs" />
      <Compile Include="Assets\Resources\Scripts\Movement.cs" />
-     <Compile Include="Assets\Resources\Scripts\Server and Client\Client.cs" />
-     <Compile Include="Assets\Resources\Scripts\Server and Client\GameServer.cs" />
-     <Compile Include="Assets\Resources\Scripts\Server and Client\Server.cs" />
+     <Compile Include="Assets\Resources\Scripts\Packet.cs" />
+     <Compile Include="Assets\Resources\Scripts\PlayerController.cs" />
+     <Compile Include="Assets\Resources\Scripts\PlayerManager.cs" />
+     <Compile Include="Assets\Resources\Scripts\ProjectileManager.cs" />
+     <Compile Include="Assets\Resources\Scripts\ServerCode\Client.cs" />
+     <Compile Include="Assets\Resources\Scripts\ServerCode\Constants.cs" />
+     <Compile Include="Assets\Resources\Scripts\ServerCode\GameLogic.cs" />
+     <Compile Include="Assets\Resources\Scripts\ServerCode\GameServer.cs" />
+     <Compile Include="Assets\Resources\Scripts\ServerCode\Packet.cs" />
+     <Compile Include="Assets\Resources\Scripts\ServerCode\Player.cs" />
+     <Compile Include="Assets\Resources\Scripts\ServerCode\Server.cs" />
+     <Compile Include="Assets\Resources\Scripts\ServerCode\ServerHandle.cs" />
+     <Compile Include="Assets\Resources\Scripts\ServerCode\ServerSend.cs" />
+     <Compile Include="Assets\Resources\Scripts\ServerCode\ThreadManager.cs" />
      <Compile Include="Assets\Resources\Scripts\ShootFireball.cs" />
+     <Compile Include="Assets\Resources\Scripts\ThreadManager.cs" />
      <Compile Include="Assets\Resources\Scripts\UIManager.cs" />
     <Reference Include="UnityEngine">
         <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.19f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
